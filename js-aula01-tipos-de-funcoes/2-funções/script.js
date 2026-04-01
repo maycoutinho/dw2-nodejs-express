@@ -34,8 +34,7 @@ sum(n1, n2); //enviando os argumentos
 
 // FUNÇÃO COM RETORNO
 
-const num1 = 50;
-const num2 = 3;
+
 
 //É INDICADO QUE AS FUNÇÕES POSSUAM O MÍNIMO DE RESPONSABILIDADES POSSIVEIS
 //ESSA FUNÇÃO IRÁ MULTIPLICAR DOIS NÚMEROS
