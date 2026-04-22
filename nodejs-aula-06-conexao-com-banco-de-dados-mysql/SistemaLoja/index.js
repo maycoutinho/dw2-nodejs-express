@@ -19,7 +19,14 @@ connection.authenticate().then(() => {
     console.log("Conexão com o banco de dados realizada com sucesso!");
 }).catch((error) =>{
     console.log(`Ocorreu um erro ao se conectar ao banco ${error}`);
-})
+});
+
+// Criando o banco de dados (somente se ainda não existir)
+connection.query("CREATE DATABASE IF NOT EXISTS SistemaLoja;").then(()=>{
+    console.log("O banco de dados está criado!");
+}).catch((error) =>{
+    console.log(`Ocorreu um erro ao criar o banco de dados. Erro: ${error}`);
+});
 
 // Iniciando o Express 
 const app = express() 
