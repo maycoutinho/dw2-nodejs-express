@@ -8,6 +8,11 @@ import ClienteController from "./controllers/ClienteController.js";
 import ProdutoController from "./controllers/ProdutoController.js";
 // PedidoController
 import PedidoController from "./controllers/PedidoController.js";
+//Usuário controller
+import UsuarioController  from "./controllers/UsuarioController.js";
+
+import session from "express-session"
+
 // Importando o arquivo de conexão com o banco
 import connection from "./config/sequelize-config.js"
 
@@ -58,20 +63,29 @@ app.use(express.static("public"));
 // Configurando o Express para aceitar dados vindo de formulários
 app.use(express.urlencoded({extended: false}))
 
+//CONFIGURANDO SESSÃO DE USUÁRIO
+app.use(session({
+  secret: "minhalojasecret",
+  cookie: {maxAge:30000}, //Sessão expira em 30 segundos(Mudar depois)
+  saveUnitialized:false, //Não salva sessões vazias(sem informação)
+  resave: false, //Evita que ele re-salve sessões
+}))
+                                          //OBRIGATORIO CONFIGURAR SESSAO DEPOIS ATIVAR AS ROTAS
+
 // Ativando o uso das ROTAS
 app.use("/", ClienteController);
 app.use("/", ProdutoController);
 app.use("/", PedidoController);
+app.use("/", UsuarioController);
+
+
 
 // ROTA PRINCIPAL
 app.get("/", function (req, res) {
   res.render("index");
 });
 
-// ROTA DE LOGIN
-app.get("/login", (req,res) =>{
-  res.render("login");
-});
+
 
 // INICIA O SERVIDOR NA PORTA 8080
 const port = 8080;
